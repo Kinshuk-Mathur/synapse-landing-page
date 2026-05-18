@@ -174,7 +174,7 @@ a {
   min-height: 100svh;
   place-items: center;
   overflow: hidden;
-  padding: 132px 24px 86px;
+  padding: 124px 24px 78px;
 }
 
 .hero-grid {
@@ -193,20 +193,19 @@ a {
 .hero-section::before {
   content: "";
   position: absolute;
-  inset: 8%;
+  inset: 12%;
   z-index: 1;
   background:
-    conic-gradient(from 180deg at 50% 50%, rgba(75, 0, 130, 0), rgba(255, 0, 184, 0.18), rgba(0, 143, 255, 0.18), rgba(255, 200, 87, 0.12), rgba(75, 0, 130, 0)),
-    radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.08), transparent 38%);
-  filter: blur(22px);
-  animation: slowSpin 42s linear infinite;
+    radial-gradient(circle at 50% 32%, rgba(255, 0, 184, 0.16), transparent 30%),
+    radial-gradient(circle at 44% 58%, rgba(0, 143, 255, 0.12), transparent 34%);
+  filter: blur(32px);
 }
 
 .hero-scene {
   position: absolute;
   inset: 0;
   z-index: 2;
-  opacity: 0.96;
+  opacity: 0.46;
 }
 
 .hero-content {
@@ -242,9 +241,9 @@ a {
   --hero-tx: 0px;
   --hero-ty: 0px;
   position: relative;
-  width: clamp(174px, 22vw, 286px);
+  width: clamp(150px, 16vw, 218px);
   aspect-ratio: 1;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
   transform: translate3d(var(--hero-tx), var(--hero-ty), 0) perspective(980px) rotateX(var(--hero-rx)) rotateY(var(--hero-ry));
   transform-style: preserve-3d;
   transition: transform 180ms ease-out;
@@ -256,14 +255,14 @@ a {
   inset: 8%;
   z-index: -1;
   border-radius: 32%;
-  background: linear-gradient(135deg, rgba(255, 0, 184, 0.34), rgba(0, 143, 255, 0.3), rgba(255, 200, 87, 0.2));
-  filter: blur(26px);
+  background: linear-gradient(135deg, rgba(255, 0, 184, 0.24), rgba(0, 143, 255, 0.2), rgba(255, 200, 87, 0.12));
+  filter: blur(22px);
   transform: translateZ(-70px);
 }
 
 .hero-logo-aura {
   position: absolute;
-  inset: -16%;
+  inset: -10%;
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 34%;
   background:
@@ -279,18 +278,18 @@ a {
   border-radius: 30%;
   object-fit: cover;
   box-shadow:
-    0 28px 100px rgba(0, 0, 0, 0.5),
-    0 0 76px rgba(255, 0, 184, 0.28),
-    0 0 58px rgba(0, 143, 255, 0.18);
+    0 26px 80px rgba(0, 0, 0, 0.5),
+    0 0 48px rgba(255, 0, 184, 0.2),
+    0 0 34px rgba(0, 143, 255, 0.14);
   transform: translateZ(34px);
 }
 
 .hero-content h1 {
-  max-width: 980px;
+  max-width: 900px;
   margin: 0;
-  font-size: clamp(3.2rem, 8.8vw, 9.4rem);
+  font-size: clamp(3rem, 7.2vw, 7.7rem);
   font-weight: 850;
-  line-height: 0.94;
+  line-height: 0.96;
   text-wrap: balance;
 }
 
@@ -942,7 +941,7 @@ a {
 .experience-section {
   position: relative;
   z-index: 3;
-  min-height: 100vh;
+  min-height: auto;
   padding: clamp(90px, 12vw, 150px) 0;
   overflow: hidden;
 }
@@ -953,17 +952,18 @@ a {
 }
 
 .experience-track {
-  display: flex;
-  width: max-content;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(1220px, calc(100vw - 32px));
   gap: 18px;
-  padding: 0 max(16px, calc((100vw - 1220px) / 2)) 48px;
-  will-change: transform;
+  margin: 0 auto;
+  padding: 0 0 48px;
 }
 
 .experience-panel {
   position: relative;
-  width: min(78vw, 640px);
-  min-height: 520px;
+  width: 100%;
+  min-height: 430px;
   padding: clamp(24px, 4vw, 44px);
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 8px;
@@ -1016,14 +1016,14 @@ a {
 }
 
 .experience-panel .section-kicker {
-  margin-top: 86px;
+  margin-top: 62px;
 }
 
 .experience-panel h3 {
   max-width: 520px;
   margin: 14px 0 0;
-  font-size: clamp(2.2rem, 5vw, 4.6rem);
-  line-height: 0.98;
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  line-height: 1.02;
 }
 
 .experience-panel p:not(.section-kicker) {

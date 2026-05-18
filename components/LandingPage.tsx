@@ -426,34 +426,10 @@ export default function LandingPage() {
       });
     }, rootRef);
 
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 900px)", () => {
-      if (!trackRef.current || !pinRef.current) return undefined;
-      const track = trackRef.current;
-      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
-
-      const tween = gsap.to(track, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pinRef.current,
-          start: "top top",
-          end: () => `+=${distance() + 720}`,
-          scrub: 0.45,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
-
-      return () => tween.kill();
-    });
-
     const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 450);
 
     return () => {
       window.clearTimeout(refresh);
-      mm.revert();
       ctx.revert();
     };
   }, [shouldReduceMotion]);
