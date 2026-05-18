@@ -1,11 +1,1 @@
-{
-  "components/LandingPage.tsx -> @/components/HeroScene": {
-    "id": 2772,
-    "files": [
-      "static/chunks/b536a0f1.05ee2c75df4a3b9d.js",
-      "static/chunks/bd904a5c.3aea2adebde6f067.js",
-      "static/chunks/b79b7286.1955594d5eba6284.js",
-      "static/chunks/673.b06263e5d4e2c1d7.js"
-    ]
-  }
-}
+{}

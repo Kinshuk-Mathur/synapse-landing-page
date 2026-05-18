@@ -75,7 +75,7 @@ a {
   position: absolute;
   inset: -20%;
   opacity: 0.72;
-  filter: blur(44px);
+  filter: blur(28px);
   transform: translateZ(0);
 }
 
@@ -198,8 +198,8 @@ a {
   background:
     conic-gradient(from 180deg at 50% 50%, rgba(75, 0, 130, 0), rgba(255, 0, 184, 0.18), rgba(0, 143, 255, 0.18), rgba(255, 200, 87, 0.12), rgba(75, 0, 130, 0)),
     radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.08), transparent 38%);
-  filter: blur(34px);
-  animation: slowSpin 22s linear infinite;
+  filter: blur(22px);
+  animation: slowSpin 42s linear infinite;
 }
 
 .hero-scene {
@@ -257,7 +257,7 @@ a {
   z-index: -1;
   border-radius: 32%;
   background: linear-gradient(135deg, rgba(255, 0, 184, 0.34), rgba(0, 143, 255, 0.3), rgba(255, 200, 87, 0.2));
-  filter: blur(38px);
+  filter: blur(26px);
   transform: translateZ(-70px);
 }
 
@@ -1063,7 +1063,7 @@ a {
     radial-gradient(circle at 50% 42%, rgba(255, 0, 184, 0.3), transparent 30%),
     radial-gradient(circle at 36% 62%, rgba(0, 143, 255, 0.22), transparent 28%),
     conic-gradient(from 110deg, rgba(75, 0, 130, 0.1), rgba(255, 200, 87, 0.14), rgba(255, 0, 184, 0.18), rgba(0, 143, 255, 0.12), rgba(75, 0, 130, 0.1));
-  filter: blur(42px);
+  filter: blur(26px);
   animation: ambientDrift 14s ease-in-out infinite alternate;
 }
 
@@ -1164,6 +1164,49 @@ a {
   50% {
     transform: translateY(-4px);
     opacity: 1;
+  }
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .site-noise,
+  .hero-scene {
+    display: none;
+  }
+
+  .ambient-field::before,
+  .ambient-field::after {
+    animation: none;
+    filter: blur(18px);
+    opacity: 0.52;
+  }
+
+  .hero-section::before,
+  .ai-visual::before,
+  .final-light {
+    animation: none;
+    filter: blur(16px);
+  }
+
+  .prompt-chip,
+  .ai-core,
+  .scroll-indicator span,
+  .typing-row span {
+    animation: none;
+  }
+
+  .nav-shell,
+  .hero-badge,
+  .prompt-chip,
+  .ai-chat-card,
+  .blocked-panel,
+  .site-row,
+  .final-card {
+    backdrop-filter: none;
+  }
+
+  .showcase-tilt,
+  .browser-mockup {
+    transform: none;
   }
 }
 

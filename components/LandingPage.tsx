@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -24,11 +24,9 @@ import {
   Cpu,
   FileText,
   GitBranch,
-  Layers3,
   ListChecks,
   Lock,
   Palette,
-  Send,
   ShieldCheck,
   Sparkles,
   Target,
@@ -42,6 +40,26 @@ const HeroScene = dynamic(() => import("@/components/HeroScene"), {
 });
 
 type IconComponent = React.ComponentType<{ className?: string }>;
+
+function useCanRenderHeroScene(shouldReduceMotion: boolean | null) {
+  const [canRender, setCanRender] = useState(false);
+
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setCanRender(false);
+      return undefined;
+    }
+
+    const query = window.matchMedia("(min-width: 760px) and (pointer: fine)");
+    const update = () => setCanRender(query.matches);
+
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, [shouldReduceMotion]);
+
+  return canRender;
+}
 
 const showcases = [
   {
@@ -184,23 +202,45 @@ function MagneticButton({
   icon?: IconComponent;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
+  const moveFrame = useRef<number | null>(null);
+  const latestOffset = useRef({ x: 0, y: 0 });
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 180, damping: 16, mass: 0.2 });
   const springY = useSpring(y, { stiffness: 180, damping: 16, mass: 0.2 });
+
+  useEffect(() => {
+    return () => {
+      if (moveFrame.current !== null) {
+        window.cancelAnimationFrame(moveFrame.current);
+      }
+    };
+  }, []);
 
   return (
     <motion.a
       ref={ref}
       href={href}
       style={{ x: springX, y: springY }}
-      onMouseMove={(event) => {
+      onPointerMove={(event) => {
         const rect = ref.current?.getBoundingClientRect();
         if (!rect) return;
-        x.set((event.clientX - rect.left - rect.width / 2) * 0.16);
-        y.set((event.clientY - rect.top - rect.height / 2) * 0.18);
+        latestOffset.current = {
+          x: (event.clientX - rect.left - rect.width / 2) * 0.16,
+          y: (event.clientY - rect.top - rect.height / 2) * 0.18
+        };
+        if (moveFrame.current !== null) return;
+        moveFrame.current = window.requestAnimationFrame(() => {
+          x.set(latestOffset.current.x);
+          y.set(latestOffset.current.y);
+          moveFrame.current = null;
+        });
       }}
-      onMouseLeave={() => {
+      onPointerLeave={() => {
+        if (moveFrame.current !== null) {
+          window.cancelAnimationFrame(moveFrame.current);
+          moveFrame.current = null;
+        }
         x.set(0);
         y.set(0);
       }}
@@ -220,8 +260,22 @@ function ProductCard({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const tiltFrame = useRef<number | null>(null);
+  const latestTilt = useRef({ rx: "0deg", ry: "0deg", mx: "50%", my: "50%" });
+
+  useEffect(() => {
+    return () => {
+      if (tiltFrame.current !== null) {
+        window.cancelAnimationFrame(tiltFrame.current);
+      }
+    };
+  }, []);
 
   const reset = () => {
+    if (tiltFrame.current !== null) {
+      window.cancelAnimationFrame(tiltFrame.current);
+      tiltFrame.current = null;
+    }
     ref.current?.style.setProperty("--rx", "0deg");
     ref.current?.style.setProperty("--ry", "0deg");
     ref.current?.style.setProperty("--mx", "50%");
@@ -230,7 +284,7 @@ function ProductCard({
 
   return (
     <motion.article
-      className={`showcase-card showcase-${item.accent} gsap-reveal`}
+      className={`showcase-card showcase-${item.accent}`}
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-18%" }}
@@ -250,17 +304,27 @@ function ProductCard({
       <div
         ref={ref}
         className="showcase-tilt"
-        onMouseMove={(event) => {
+        onPointerMove={(event) => {
           const rect = ref.current?.getBoundingClientRect();
           if (!rect) return;
           const px = (event.clientX - rect.left) / rect.width;
           const py = (event.clientY - rect.top) / rect.height;
-          ref.current?.style.setProperty("--rx", `${(0.5 - py) * 9}deg`);
-          ref.current?.style.setProperty("--ry", `${(px - 0.5) * 12}deg`);
-          ref.current?.style.setProperty("--mx", `${px * 100}%`);
-          ref.current?.style.setProperty("--my", `${py * 100}%`);
+          latestTilt.current = {
+            rx: `${(0.5 - py) * 9}deg`,
+            ry: `${(px - 0.5) * 12}deg`,
+            mx: `${px * 100}%`,
+            my: `${py * 100}%`
+          };
+          if (tiltFrame.current !== null) return;
+          tiltFrame.current = window.requestAnimationFrame(() => {
+            ref.current?.style.setProperty("--rx", latestTilt.current.rx);
+            ref.current?.style.setProperty("--ry", latestTilt.current.ry);
+            ref.current?.style.setProperty("--mx", latestTilt.current.mx);
+            ref.current?.style.setProperty("--my", latestTilt.current.my);
+            tiltFrame.current = null;
+          });
         }}
-        onMouseLeave={reset}
+        onPointerLeave={reset}
       >
         <div className="showcase-screen">
           <Image
@@ -289,7 +353,7 @@ function FeatureCard({
 }) {
   return (
     <motion.article
-      className="feature-card gsap-reveal"
+      className="feature-card"
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-14%" }}
@@ -307,13 +371,34 @@ function FeatureCard({
 
 export default function LandingPage() {
   const rootRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLElement>(null);
   const logoShellRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const canRenderHeroScene = useCanRenderHeroScene(shouldReduceMotion);
+  const [isHeroSceneActive, setIsHeroSceneActive] = useState(false);
   const { scrollYProgress } = useScroll();
   const heroLift = useTransform(scrollYProgress, [0, 0.18], [0, -130]);
   const heroFade = useTransform(scrollYProgress, [0, 0.16], [1, 0.18]);
+
+  useEffect(() => {
+    if (!canRenderHeroScene) {
+      setIsHeroSceneActive(false);
+      return undefined;
+    }
+
+    const node = heroSectionRef.current;
+    if (!node) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsHeroSceneActive(entry.isIntersecting),
+      { rootMargin: "260px 0px" }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [canRenderHeroScene]);
 
   useEffect(() => {
     if (shouldReduceMotion) return;
@@ -324,13 +409,13 @@ export default function LandingPage() {
       gsap.utils.toArray<HTMLElement>(".gsap-reveal").forEach((element) => {
         gsap.fromTo(
           element,
-          { autoAlpha: 0, y: 34, filter: "blur(10px)" },
+          { autoAlpha: 0, y: 26 },
           {
             autoAlpha: 1,
             y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
+            duration: 0.68,
             ease: "power3.out",
+            force3D: true,
             scrollTrigger: {
               trigger: element,
               start: "top 82%",
@@ -345,7 +430,7 @@ export default function LandingPage() {
     mm.add("(min-width: 900px)", () => {
       if (!trackRef.current || !pinRef.current) return undefined;
       const track = trackRef.current;
-      const distance = () => track.scrollWidth - window.innerWidth + 80;
+      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
 
       const tween = gsap.to(track, {
         x: () => -distance(),
@@ -354,8 +439,9 @@ export default function LandingPage() {
           trigger: pinRef.current,
           start: "top top",
           end: () => `+=${distance() + 720}`,
-          scrub: 0.9,
+          scrub: 0.45,
           pin: true,
+          anticipatePin: 1,
           invalidateOnRefresh: true
         }
       });
@@ -374,19 +460,35 @@ export default function LandingPage() {
 
   useEffect(() => {
     if (shouldReduceMotion) return;
+    const query = window.matchMedia("(min-width: 760px) and (pointer: fine)");
+    if (!query.matches) return;
+
+    let frame = 0;
+    let latestX = 0;
+    let latestY = 0;
 
     const handleMove = (event: PointerEvent) => {
-      if (!logoShellRef.current) return;
-      const x = event.clientX / window.innerWidth - 0.5;
-      const y = event.clientY / window.innerHeight - 0.5;
-      logoShellRef.current.style.setProperty("--hero-rx", `${y * -10}deg`);
-      logoShellRef.current.style.setProperty("--hero-ry", `${x * 14}deg`);
-      logoShellRef.current.style.setProperty("--hero-tx", `${x * 18}px`);
-      logoShellRef.current.style.setProperty("--hero-ty", `${y * 14}px`);
+      latestX = event.clientX / window.innerWidth - 0.5;
+      latestY = event.clientY / window.innerHeight - 0.5;
+
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        if (!logoShellRef.current) return;
+        logoShellRef.current.style.setProperty("--hero-rx", `${latestY * -8}deg`);
+        logoShellRef.current.style.setProperty("--hero-ry", `${latestX * 10}deg`);
+        logoShellRef.current.style.setProperty("--hero-tx", `${latestX * 12}px`);
+        logoShellRef.current.style.setProperty("--hero-ty", `${latestY * 10}px`);
+      });
     };
 
-    window.addEventListener("pointermove", handleMove);
-    return () => window.removeEventListener("pointermove", handleMove);
+    window.addEventListener("pointermove", handleMove, { passive: true });
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
   }, [shouldReduceMotion]);
 
   return (
@@ -418,10 +520,10 @@ export default function LandingPage() {
       </header>
 
       <main>
-        <section id="hero" className="hero-section">
+        <section ref={heroSectionRef} id="hero" className="hero-section">
           <div className="hero-grid" />
           <div className="hero-scene" aria-hidden="true">
-            <HeroScene />
+            {canRenderHeroScene && isHeroSceneActive ? <HeroScene /> : null}
           </div>
 
           <motion.div style={{ y: heroLift, opacity: heroFade }} className="hero-content">

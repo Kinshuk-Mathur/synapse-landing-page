@@ -1,14 +1,16 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
+
+const PARTICLE_COUNT = 180;
 
 function ParticleField() {
   const points = useRef<THREE.Points>(null);
   const geometry = useMemo(() => {
-    const positions = new Float32Array(420 * 3);
-    for (let i = 0; i < 420; i += 1) {
+    const positions = new Float32Array(PARTICLE_COUNT * 3);
+    for (let i = 0; i < PARTICLE_COUNT; i += 1) {
       const stride = i * 3;
       positions[stride] = (Math.random() - 0.5) * 11;
       positions[stride + 1] = (Math.random() - 0.5) * 6;
@@ -18,6 +20,10 @@ function ParticleField() {
     buffer.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     return buffer;
   }, []);
+
+  useEffect(() => {
+    return () => geometry.dispose();
+  }, [geometry]);
 
   useFrame(({ clock, pointer }) => {
     if (!points.current) return;
@@ -64,17 +70,15 @@ function GlassSphere({
 
   return (
     <mesh ref={mesh} position={position} scale={scale}>
-      <sphereGeometry args={[1, 32, 32]} />
-      <meshPhysicalMaterial
+      <sphereGeometry args={[1, 20, 20]} />
+      <meshStandardMaterial
         color={color}
-        roughness={0.12}
-        metalness={0.18}
-        transmission={0.38}
-        thickness={1.4}
+        emissive={color}
+        emissiveIntensity={0.18}
+        roughness={0.36}
+        metalness={0.26}
         transparent
-        opacity={0.54}
-        clearcoat={1}
-        clearcoatRoughness={0.18}
+        opacity={0.48}
       />
     </mesh>
   );
@@ -94,24 +98,23 @@ function CoreSystem() {
   return (
     <group ref={group}>
       <mesh>
-        <icosahedronGeometry args={[1.08, 2]} />
-        <meshPhysicalMaterial
+        <icosahedronGeometry args={[1.08, 1]} />
+        <meshStandardMaterial
           color="#4B0082"
           emissive="#2c0057"
           emissiveIntensity={0.36}
-          metalness={0.42}
-          roughness={0.22}
-          clearcoat={1}
+          metalness={0.34}
+          roughness={0.28}
           transparent
           opacity={0.72}
         />
       </mesh>
       <mesh ref={ring} rotation={[Math.PI / 2.5, 0, 0]}>
-        <torusGeometry args={[1.56, 0.012, 12, 128]} />
+        <torusGeometry args={[1.56, 0.012, 8, 72]} />
         <meshBasicMaterial color="#FF00B8" transparent opacity={0.75} />
       </mesh>
       <mesh rotation={[0, Math.PI / 2.3, 0]}>
-        <torusGeometry args={[1.84, 0.01, 12, 128]} />
+        <torusGeometry args={[1.84, 0.01, 8, 72]} />
         <meshBasicMaterial color="#008FFF" transparent opacity={0.5} />
       </mesh>
     </group>
@@ -121,23 +124,21 @@ function CoreSystem() {
 export default function HeroScene() {
   return (
     <Canvas
-      dpr={[1, 1.7]}
+      dpr={[1, 1.2]}
       camera={{ position: [0, 0, 6], fov: 42 }}
       gl={{
         alpha: true,
-        antialias: true,
+        antialias: false,
         powerPreference: "high-performance",
-        preserveDrawingBuffer: true
+        stencil: false
       }}
     >
       <ambientLight intensity={0.55} />
-      <pointLight position={[2.8, 2.4, 3]} intensity={6.2} color="#FF00B8" />
-      <pointLight position={[-3, -1.8, 2.4]} intensity={4.3} color="#008FFF" />
-      <pointLight position={[0, 3.2, 1.5]} intensity={2.4} color="#FFC857" />
+      <pointLight position={[2.8, 2.4, 3]} intensity={3.6} color="#FF00B8" />
+      <pointLight position={[-3, -1.8, 2.4]} intensity={2.6} color="#008FFF" />
       <ParticleField />
       <GlassSphere position={[-2.45, 0.9, -0.7]} color="#008FFF" scale={0.34} speed={0.86} />
       <GlassSphere position={[2.3, -0.5, -0.3]} color="#FF00B8" scale={0.42} speed={0.72} />
-      <GlassSphere position={[1.15, 1.35, -1.4]} color="#FFC857" scale={0.2} speed={1.08} />
       <CoreSystem />
     </Canvas>
   );

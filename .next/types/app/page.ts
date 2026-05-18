@@ -1,4 +1,4 @@
-// File: /Users/kinshukmathur/Desktop/synapse-landing-page/app/page.tsx
+// File: /Users/mac/Desktop/synapse-landing-page/app/page.tsx
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
