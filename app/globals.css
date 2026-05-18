@@ -174,7 +174,7 @@ a {
   min-height: 100svh;
   place-items: center;
   overflow: hidden;
-  padding: 124px 24px 78px;
+  padding: 148px 24px 74px;
 }
 
 .hero-grid {
@@ -223,7 +223,7 @@ a {
   align-items: center;
   gap: 9px;
   min-height: 38px;
-  margin-bottom: 26px;
+  margin-bottom: 24px;
   padding: 0 14px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 999px;
@@ -241,9 +241,9 @@ a {
   --hero-tx: 0px;
   --hero-ty: 0px;
   position: relative;
-  width: clamp(150px, 16vw, 218px);
+  width: clamp(144px, 14vw, 196px);
   aspect-ratio: 1;
-  margin-bottom: 28px;
+  margin-bottom: 40px;
   transform: translate3d(var(--hero-tx), var(--hero-ty), 0) perspective(980px) rotateX(var(--hero-rx)) rotateY(var(--hero-ry));
   transform-style: preserve-3d;
   transition: transform 180ms ease-out;
@@ -285,17 +285,17 @@ a {
 }
 
 .hero-content h1 {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0;
-  font-size: clamp(3rem, 7.2vw, 7.7rem);
+  font-size: clamp(3rem, 6.7vw, 7.1rem);
   font-weight: 850;
   line-height: 0.96;
   text-wrap: balance;
 }
 
 .hero-content p {
-  max-width: 760px;
-  margin: 28px 0 0;
+  max-width: 730px;
+  margin: 26px 0 0;
   color: rgba(255, 255, 255, 0.74);
   font-size: clamp(1.05rem, 2.2vw, 1.45rem);
   line-height: 1.7;
@@ -306,7 +306,7 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   gap: 14px;
-  margin-top: 36px;
+  margin-top: 38px;
 }
 
 .magnetic-button {
@@ -322,6 +322,15 @@ a {
   font-weight: 800;
   isolation: isolate;
   transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.button-image-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 0 10px rgba(255, 0, 184, 0.28));
 }
 
 .magnetic-button::before {
@@ -755,10 +764,20 @@ a {
 .chat-bubble.assistant {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.07);
   color: rgba(255, 255, 255, 0.86);
+}
+
+.chat-ai-logo {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  margin-top: 1px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: drop-shadow(0 0 12px rgba(255, 0, 184, 0.26));
 }
 
 .typing-row {

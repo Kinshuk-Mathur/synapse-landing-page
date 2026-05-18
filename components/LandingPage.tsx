@@ -194,12 +194,14 @@ function MagneticButton({
   href,
   children,
   variant = "primary",
-  icon: Icon
+  icon: Icon,
+  imageIcon
 }: {
   href: string;
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   icon?: IconComponent;
+  imageIcon?: string;
 }) {
   const ref = useRef<HTMLAnchorElement>(null);
   const moveFrame = useRef<number | null>(null);
@@ -247,6 +249,9 @@ function MagneticButton({
       className={`magnetic-button ${variant === "primary" ? "magnetic-primary" : "magnetic-secondary"}`}
     >
       <span>{children}</span>
+      {imageIcon ? (
+        <Image src={imageIcon} alt="" width={24} height={24} className="button-image-icon" />
+      ) : null}
       {Icon ? <Icon className="h-4 w-4" /> : null}
     </motion.a>
   );
@@ -549,7 +554,7 @@ export default function LandingPage() {
               <MagneticButton href="#final" icon={ArrowRight}>
                 Get Started
               </MagneticButton>
-              <MagneticButton href="#ai" icon={Bot} variant="secondary">
+              <MagneticButton href="#ai" imageIcon="/assets/ai-logo-ring.png" variant="secondary">
                 Explore SYNAPSE AI
               </MagneticButton>
             </motion.div>
@@ -626,7 +631,7 @@ export default function LandingPage() {
               <div className="ai-chat-card">
                 <div className="chat-bubble user">Create my study plan for this week.</div>
                 <div className="chat-bubble assistant">
-                  <Sparkles className="h-4 w-4 text-gold" />
+                  <Image src="/assets/ai-logo-ring.png" alt="" width={28} height={28} className="chat-ai-logo" />
                   I will balance revision, mocks, focus sessions, and weak topics.
                 </div>
                 <div className="typing-row">
