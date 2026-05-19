@@ -24,8 +24,10 @@ import {
   Cpu,
   FileText,
   GitBranch,
+  Instagram,
   ListChecks,
   Lock,
+  Mail,
   Palette,
   ShieldCheck,
   Sparkles,
@@ -492,7 +494,7 @@ export default function LandingPage() {
           <a href="#ai">AI</a>
           <a href="#experience">Experience</a>
         </nav>
-        <a className="nav-cta" href="#final">
+        <a className="nav-cta" href="/coming-soon">
           Launch
           <ArrowRight className="h-4 w-4" />
         </a>
@@ -549,7 +551,7 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.82, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
             >
-              <MagneticButton href="#final" icon={ArrowRight}>
+              <MagneticButton href="/coming-soon" icon={ArrowRight}>
                 Get Started
               </MagneticButton>
               <MagneticButton href="#ai" imageIcon="/assets/ai-logo-ring.png" variant="secondary">
@@ -740,12 +742,72 @@ export default function LandingPage() {
               A futuristic AI operating system for students who want focus, clarity, and measurable
               progress in one premium workspace.
             </p>
-            <MagneticButton href="#hero" icon={Zap}>
+            <MagneticButton href="/coming-soon" icon={Zap}>
               Launch SYNAPSE
             </MagneticButton>
           </div>
         </section>
       </main>
+
+      <footer className="landing-footer" aria-label="SYNAPSE footer">
+        <div className="footer-brand-block">
+          <a className="footer-logo-lockup" href="#hero" aria-label="SYNAPSE home">
+            <Image
+              src="/assets/synapse-icon-transparent.png"
+              alt=""
+              width={58}
+              height={48}
+              className="footer-logo-mark"
+            />
+            <span>SYNAPSE</span>
+          </a>
+          <p>AI student operating system for focus, planning, goals, and intelligent learning.</p>
+          <div className="footer-legal">
+            <span>Copyright 2026</span>
+            <a href="mailto:aisynapse08@gmail.com">Contact</a>
+            <a href="/coming-soon">Launch</a>
+          </div>
+        </div>
+
+        <div className="footer-column">
+          <h3>Follow Us</h3>
+          <div className="footer-socials">
+            <a
+              href="https://www.instagram.com/synapse.27"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Follow SYNAPSE on Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+          </div>
+          <a className="footer-text-link" href="https://www.instagram.com/synapse.27" target="_blank" rel="noreferrer">
+            @synapse.27
+          </a>
+        </div>
+
+        <div className="footer-column">
+          <h3>Support Us</h3>
+          <a className="footer-action" href="/coming-soon">
+            Coming Soon
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a className="footer-text-link" href="mailto:aisynapse08@gmail.com">
+            <Mail className="h-4 w-4" />
+            aisynapse08@gmail.com
+          </a>
+        </div>
+
+        <div className="footer-column footer-links-column">
+          <h3>Resources & Links</h3>
+          <div className="footer-links-grid">
+            <a href="#showcase">Product</a>
+            <a href="#features">Features</a>
+            <a href="#ai">SYNAPSE AI</a>
+            <a href="#experience">Experience</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
