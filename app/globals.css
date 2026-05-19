@@ -380,29 +380,6 @@ main {
     0 0 42px rgba(0, 143, 255, 0.16);
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  z-index: 5;
-  display: grid;
-  width: 32px;
-  height: 52px;
-  place-items: start center;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  transform: translateX(-50%);
-}
-
-.scroll-indicator span {
-  width: 4px;
-  height: 10px;
-  margin-top: 10px;
-  border-radius: 999px;
-  background: var(--pearl);
-  animation: scrollPulse 1.65s ease-in-out infinite;
-}
-
 .section-wrap {
   position: relative;
   z-index: 3;
@@ -1183,20 +1160,6 @@ main {
   }
 }
 
-@keyframes scrollPulse {
-  0% {
-    transform: translateY(0);
-    opacity: 0.35;
-  }
-  45% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(22px);
-    opacity: 0;
-  }
-}
-
 @keyframes floatCore {
   0%,
   100% {
@@ -1251,7 +1214,6 @@ main {
 
   .prompt-chip,
   .ai-core,
-  .scroll-indicator span,
   .typing-row span {
     animation: none;
   }
@@ -1443,10 +1405,6 @@ main {
     max-width: 100%;
     min-height: 50px;
     padding: 0 18px;
-  }
-
-  .scroll-indicator {
-    display: none;
   }
 
   .section-wrap {

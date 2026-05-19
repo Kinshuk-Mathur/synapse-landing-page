@@ -33,7 +33,6 @@ import {
   Timer,
   Zap
 } from "lucide-react";
-import SmoothScroll from "@/components/SmoothScroll";
 
 const HeroScene = dynamic(() => import("@/components/HeroScene"), {
   ssr: false
@@ -380,8 +379,6 @@ export default function LandingPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLElement>(null);
   const logoShellRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const pinRef = useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
   const canRenderHeroScene = useCanRenderHeroScene(shouldReduceMotion);
   const [isHeroSceneActive, setIsHeroSceneActive] = useState(false);
@@ -433,29 +430,6 @@ export default function LandingPage() {
       });
     }, rootRef);
 
-    const mm = gsap.matchMedia();
-    mm.add("(min-width: 981px)", () => {
-      if (!trackRef.current || !pinRef.current) return undefined;
-      const track = trackRef.current;
-      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
-
-      const tween = gsap.to(track, {
-        x: () => -distance(),
-        ease: "none",
-        scrollTrigger: {
-          trigger: pinRef.current,
-          start: "top top",
-          end: () => `+=${distance() + 720}`,
-          scrub: 0.45,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true
-        }
-      });
-
-      return () => tween.kill();
-    });
-
     const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 450);
 
     return () => {
@@ -499,7 +473,6 @@ export default function LandingPage() {
 
   return (
     <div ref={rootRef} className="min-h-screen overflow-hidden bg-obsidian text-pearl">
-      <SmoothScroll />
       <div className="site-noise" />
       <div className="ambient-field" />
 
@@ -585,9 +558,6 @@ export default function LandingPage() {
             </motion.div>
           </motion.div>
 
-          <a className="scroll-indicator" href="#showcase" aria-label="Scroll to product showcase">
-            <span />
-          </a>
         </section>
 
         <section id="showcase" className="section-wrap product-showcase">
@@ -724,7 +694,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section ref={pinRef} id="experience" className="experience-section">
+        <section id="experience" className="experience-section">
           <div className="experience-intro">
             <span className="section-kicker">Experience</span>
             <h2>Cinematic workflow, built for repetition.</h2>
@@ -734,7 +704,7 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div ref={trackRef} className="experience-track">
+          <div className="experience-track">
             {experiencePanels.map((panel, index) => {
               const Icon = panel.icon;
               return (
