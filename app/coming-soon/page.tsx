@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Instagram, Mail } from "lucide-react";
+import { ArrowLeft, Instagram, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Coming Soon - SYNAPSE",
@@ -96,10 +96,6 @@ export default function ComingSoonPage() {
 
         <div className="footer-column">
           <h3>Support Us</h3>
-          <a className="footer-action" href="/coming-soon">
-            Coming Soon
-            <ArrowRight className="h-4 w-4" />
-          </a>
           <a className="footer-text-link" href="mailto:aisynapse08@gmail.com">
             <Mail className="h-4 w-4" />
             aisynapse08@gmail.com

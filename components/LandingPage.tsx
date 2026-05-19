@@ -788,10 +788,6 @@ export default function LandingPage() {
 
         <div className="footer-column">
           <h3>Support Us</h3>
-          <a className="footer-action" href="/coming-soon">
-            Coming Soon
-            <ArrowRight className="h-4 w-4" />
-          </a>
           <a className="footer-text-link" href="mailto:aisynapse08@gmail.com">
             <Mail className="h-4 w-4" />
             aisynapse08@gmail.com
