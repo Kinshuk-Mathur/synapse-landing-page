@@ -1354,11 +1354,12 @@ main {
   }
 
   .experience-track {
+    display: grid;
+    grid-template-columns: 1fr;
     width: min(1220px, calc(100vw - 32px));
     margin: 0 auto;
-    flex-direction: column;
     gap: 16px;
-    padding: 0 0 48px;
+    padding: 0;
     transform: none !important;
     will-change: auto;
   }
@@ -1671,7 +1672,7 @@ main {
   }
 
   .experience-section {
-    padding: 64px 0;
+    padding: 56px 0 48px;
   }
 
   .experience-intro,
@@ -1680,42 +1681,52 @@ main {
   }
 
   .experience-intro {
-    margin-bottom: 28px;
+    margin-bottom: 22px;
   }
 
   .experience-panel {
-    padding: 20px;
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 0 14px;
+    padding: 16px;
+    box-shadow: 0 18px 64px rgba(0, 0, 0, 0.34);
   }
 
   .panel-index {
-    top: 16px;
-    right: 18px;
-    font-size: 3.2rem;
+    display: none;
   }
 
   .panel-icon {
-    width: 56px;
-    height: 56px;
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: 52px;
+    height: 52px;
   }
 
   .experience-panel .section-kicker {
-    margin-top: 42px;
+    grid-column: 2;
+    align-self: center;
+    margin-top: 0;
   }
 
   .experience-panel h3 {
-    font-size: clamp(1.7rem, 8.5vw, 2.5rem);
+    grid-column: 1 / -1;
+    margin-top: 16px;
+    font-size: clamp(1.45rem, 7.4vw, 2.05rem);
     line-height: 1.04;
   }
 
   .experience-panel p:not(.section-kicker) {
-    margin-top: 16px;
-    font-size: 0.95rem;
-    line-height: 1.62;
+    grid-column: 1 / -1;
+    margin-top: 12px;
+    font-size: 0.92rem;
+    line-height: 1.58;
   }
 
   .experience-panel strong {
-    min-height: 36px;
-    margin-top: 24px;
+    grid-column: 1 / -1;
+    min-height: 34px;
+    margin-top: 16px;
   }
 
   .final-cta {
@@ -1752,6 +1763,21 @@ main {
 
   .site-row {
     grid-template-columns: minmax(64px, 0.75fr) minmax(56px, 1fr) auto;
+  }
+
+  .experience-panel {
+    grid-template-columns: 46px minmax(0, 1fr);
+    gap: 0 12px;
+    padding: 14px;
+  }
+
+  .panel-icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .experience-panel h3 {
+    font-size: clamp(1.35rem, 7.2vw, 1.9rem);
   }
 }
 
