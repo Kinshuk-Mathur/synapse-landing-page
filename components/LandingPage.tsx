@@ -225,6 +225,7 @@ function MagneticButton({
       href={href}
       style={{ x: springX, y: springY }}
       onPointerMove={(event) => {
+        if (event.pointerType !== "mouse") return;
         const rect = ref.current?.getBoundingClientRect();
         if (!rect) return;
         latestOffset.current = {
@@ -310,6 +311,7 @@ function ProductCard({
         ref={ref}
         className="showcase-tilt"
         onPointerMove={(event) => {
+          if (event.pointerType !== "mouse") return;
           const rect = ref.current?.getBoundingClientRect();
           if (!rect) return;
           const px = (event.clientX - rect.left) / rect.width;
@@ -336,7 +338,7 @@ function ProductCard({
             src={item.image}
             alt={item.alt}
             fill
-            sizes="(max-width: 768px) 94vw, 66vw"
+            sizes="(max-width: 640px) calc(100vw - 60px), (max-width: 980px) 88vw, 66vw"
             className="object-cover"
           />
         </div>
@@ -430,6 +432,29 @@ export default function LandingPage() {
         );
       });
     }, rootRef);
+
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 981px)", () => {
+      if (!trackRef.current || !pinRef.current) return undefined;
+      const track = trackRef.current;
+      const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
+
+      const tween = gsap.to(track, {
+        x: () => -distance(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: pinRef.current,
+          start: "top top",
+          end: () => `+=${distance() + 720}`,
+          scrub: 0.45,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      });
+
+      return () => tween.kill();
+    });
 
     const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 450);
 
