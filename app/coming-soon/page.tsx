@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Instagram, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Instagram, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Coming Soon - SYNAPSE",
@@ -36,10 +36,10 @@ export default function ComingSoonPage() {
           <span />
           <span />
           <Image
-            src="/assets/synapse-icon-transparent.png"
+            src="/assets/synapse_icon_transparent.png"
             alt=""
-            width={128}
-            height={106}
+            width={424}
+            height={386}
             priority
           />
         </div>
@@ -50,21 +50,71 @@ export default function ComingSoonPage() {
             Coming Soon<span className="coming-dots" aria-hidden="true" />
           </h1>
           <p>
-            We will add the main website link here in the future. For now, this page is holding
+            The future of focused learning and student productivity is coming soon.
+            For now, this page is holding
             the launch space while SYNAPSE gets ready.
           </p>
         </div>
       </section>
 
-      <footer className="coming-footer">
-        <a href="https://www.instagram.com/synapse.27" target="_blank" rel="noreferrer">
-          <Instagram className="h-4 w-4" />
-          @synapse.27
-        </a>
-        <a href="mailto:aisynapse08@gmail.com">
-          <Mail className="h-4 w-4" />
-          aisynapse08@gmail.com
-        </a>
+      <footer className="landing-footer" aria-label="SYNAPSE footer">
+        <div className="footer-brand-block">
+          <a className="footer-logo-lockup" href="/" aria-label="SYNAPSE home">
+            <Image
+              src="/assets/synapse-icon-transparent.png"
+              alt=""
+              width={58}
+              height={48}
+              className="footer-logo-mark"
+            />
+            <span>SYNAPSE</span>
+          </a>
+          <p>AI student operating system for focus, planning, goals, and intelligent learning.</p>
+          <div className="footer-legal">
+            <span>Copyright 2026</span>
+            <a href="mailto:aisynapse08@gmail.com">Contact</a>
+            <a href="/coming-soon">Launch</a>
+          </div>
+        </div>
+
+        <div className="footer-column">
+          <h3>Follow Us</h3>
+          <div className="footer-socials">
+            <a
+              href="https://www.instagram.com/synapse.27"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Follow SYNAPSE on Instagram"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+          </div>
+          <a className="footer-text-link" href="https://www.instagram.com/synapse.27" target="_blank" rel="noreferrer">
+            @synapse.27
+          </a>
+        </div>
+
+        <div className="footer-column">
+          <h3>Support Us</h3>
+          <a className="footer-action" href="/coming-soon">
+            Coming Soon
+            <ArrowRight className="h-4 w-4" />
+          </a>
+          <a className="footer-text-link" href="mailto:aisynapse08@gmail.com">
+            <Mail className="h-4 w-4" />
+            aisynapse08@gmail.com
+          </a>
+        </div>
+
+        <div className="footer-column footer-links-column">
+          <h3>Resources & Links</h3>
+          <div className="footer-links-grid">
+            <a href="/#showcase">Product</a>
+            <a href="/#features">Features</a>
+            <a href="/#ai">SYNAPSE AI</a>
+            <a href="/#experience">Experience</a>
+          </div>
+        </div>
       </footer>
     </main>
   );

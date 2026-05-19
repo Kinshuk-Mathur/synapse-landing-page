@@ -98,7 +98,7 @@ const showcases = [
     title: "A study copilot that understands school context.",
     copy:
       "Ask for plans, explain concepts, summarize PDFs, solve doubts, and route prompts through the right AI mode.",
-    image: "/assets/synapse-ai-solve.png",
+    image: "/assets/synapse-ai-solve.jpeg",
     alt: "SYNAPSE AI solving a math equation step by step",
     accent: "purple",
     stats: ["study plans", "PDF summaries", "doubt solving"]
