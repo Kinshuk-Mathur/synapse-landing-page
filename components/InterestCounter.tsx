@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { CheckCircle2, Sparkles } from "lucide-react";
 
-const BASE_INTEREST = 1000;
-const COUNT_KEY = "synapse_interest_count";
+const BASE_INTEREST = 880;
 const VOTED_KEY = "synapse_interest_voted";
+const INTEREST_API = "/.netlify/functions/interest";
 
 function playSuccessSfx() {
   const AudioContextClass =
@@ -53,28 +53,69 @@ export default function InterestCounter() {
   const [count, setCount] = useState(BASE_INTEREST);
   const [hasVoted, setHasVoted] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const savedCount = Number(window.localStorage.getItem(COUNT_KEY));
     const savedVote = window.localStorage.getItem(VOTED_KEY) === "true";
 
-    setCount(Number.isFinite(savedCount) && savedCount >= BASE_INTEREST ? savedCount : BASE_INTEREST);
     setHasVoted(savedVote);
     setIsReady(true);
   }, []);
 
-  const handleInterest = () => {
-    if (hasVoted) return;
+  useEffect(() => {
+    let isMounted = true;
 
-    const nextCount = count + 1;
-    setCount(nextCount);
-    setHasVoted(true);
-    window.localStorage.setItem(COUNT_KEY, String(nextCount));
-    window.localStorage.setItem(VOTED_KEY, "true");
-    playSuccessSfx();
+    const syncCount = async () => {
+      try {
+        const response = await fetch(INTEREST_API, { cache: "no-store" });
+        if (!response.ok) return;
+        const data = (await response.json()) as { count?: number };
+        const nextCount = Number(data.count);
+        if (isMounted && Number.isFinite(nextCount) && nextCount >= BASE_INTEREST) {
+          setCount(nextCount);
+        }
+      } catch {
+        // Netlify functions are not available in plain next dev; keep the fallback count.
+      }
+    };
 
-    if ("vibrate" in navigator) {
-      navigator.vibrate?.(35);
+    void syncCount();
+    const interval = window.setInterval(syncCount, 6000);
+
+    return () => {
+      isMounted = false;
+      window.clearInterval(interval);
+    };
+  }, []);
+
+  const handleInterest = async () => {
+    if (hasVoted || isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(INTEREST_API, {
+        method: "POST",
+        cache: "no-store"
+      });
+      const data = response.ok ? ((await response.json()) as { count?: number }) : {};
+      const nextCount = Number(data.count);
+
+      setCount(Number.isFinite(nextCount) && nextCount >= BASE_INTEREST ? nextCount : count + 1);
+      setHasVoted(true);
+      window.localStorage.setItem(VOTED_KEY, "true");
+      playSuccessSfx();
+
+      if ("vibrate" in navigator) {
+        navigator.vibrate?.(35);
+      }
+    } catch {
+      setCount((currentCount) => currentCount + 1);
+      setHasVoted(true);
+      window.localStorage.setItem(VOTED_KEY, "true");
+      playSuccessSfx();
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -88,10 +129,10 @@ export default function InterestCounter() {
           className="interest-button"
           type="button"
           onClick={handleInterest}
-          disabled={!isReady}
+          disabled={!isReady || isSubmitting}
         >
           <Sparkles className="h-4 w-4" />
-          I&apos;m interested
+          {isSubmitting ? "Counting..." : "I'm interested"}
         </button>
       ) : (
         <div className="interest-success" role="status">
