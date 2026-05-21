@@ -1281,6 +1281,85 @@ main {
   line-height: 1.72;
 }
 
+.interest-card {
+  display: flex;
+  width: min(100%, 620px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025)),
+    rgba(13, 13, 16, 0.66);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.34),
+    0 0 42px rgba(255, 0, 184, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.interest-count {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1rem, 1.7vw, 1.18rem);
+  line-height: 1.55;
+}
+
+.interest-count strong {
+  color: var(--pearl);
+  font-size: 1.18em;
+  font-weight: 900;
+}
+
+.interest-button {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255, 0, 184, 0.72), rgba(75, 0, 130, 0.92));
+  box-shadow:
+    0 0 36px rgba(255, 0, 184, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: var(--pearl);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 850;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.interest-button:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 0 46px rgba(255, 0, 184, 0.34),
+    0 0 30px rgba(0, 143, 255, 0.14);
+  transform: translateY(-2px);
+}
+
+.interest-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.interest-success {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  border: 1px solid rgba(132, 255, 170, 0.28);
+  border-radius: 999px;
+  background: rgba(31, 197, 97, 0.12);
+  color: #8dffb4;
+  box-shadow: 0 0 30px rgba(31, 197, 97, 0.18);
+  font-size: 1rem;
+}
+
 .coming-dots::after {
   content: "...";
   display: inline-block;

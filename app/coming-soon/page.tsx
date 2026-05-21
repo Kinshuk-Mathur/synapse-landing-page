@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Instagram, Mail } from "lucide-react";
+import InterestCounter from "@/components/InterestCounter";
 
 export const metadata: Metadata = {
   title: "Coming Soon - SYNAPSE",
@@ -54,6 +55,7 @@ export default function ComingSoonPage() {
             For now, this page is holding
             the launch space while SYNAPSE gets ready.
           </p>
+          <InterestCounter />
         </div>
       </section>
 
