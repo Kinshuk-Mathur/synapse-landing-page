@@ -515,7 +515,7 @@ export default function LandingPage() {
               transition={{ duration: 0.6 }}
             >
               <Sparkles className="h-4 w-4 text-gold" />
-              AI-powered student operating system
+              AI-powered student productivity hub
             </motion.div>
 
             <div ref={logoShellRef} className="hero-logo-shell">
@@ -739,7 +739,7 @@ export default function LandingPage() {
             <span className="section-kicker">SYNAPSE</span>
             <h2>Build Your Future With SYNAPSE</h2>
             <p>
-              A futuristic AI operating system for students who want focus, clarity, and measurable
+              A futuristic AI productivity hub for students who want focus, clarity, and measurable
               progress in one premium workspace.
             </p>
             <MagneticButton href="/coming-soon" icon={Zap}>
@@ -761,7 +761,7 @@ export default function LandingPage() {
             />
             <span>SYNAPSE</span>
           </a>
-          <p>AI student operating system for focus, planning, goals, and intelligent learning.</p>
+          <p>AI student productivity hub for focus, planning, goals, and intelligent learning.</p>
           <div className="footer-legal">
             <span>Copyright 2026</span>
             <a href="mailto:aisynapse08@gmail.com">Contact</a>

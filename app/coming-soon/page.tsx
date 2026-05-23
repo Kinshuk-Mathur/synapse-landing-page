@@ -71,7 +71,7 @@ export default function ComingSoonPage() {
             />
             <span>SYNAPSE</span>
           </a>
-          <p>AI student operating system for focus, planning, goals, and intelligent learning.</p>
+          <p>AI student productivity hub for focus, planning, goals, and intelligent learning.</p>
           <div className="footer-legal">
             <span>Copyright 2026</span>
             <a href="mailto:aisynapse08@gmail.com">Contact</a>

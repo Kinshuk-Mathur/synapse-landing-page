@@ -1141,7 +1141,8 @@ main {
   display: grid;
   min-height: 100svh;
   grid-template-rows: auto 1fr auto;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background:
     linear-gradient(180deg, rgba(13, 13, 16, 0.78), rgba(13, 13, 16, 1) 68%),
     var(--obsidian);
@@ -1775,12 +1776,27 @@ main {
   .coming-hero {
     width: min(760px, calc(100vw - 32px));
     grid-template-columns: 1fr;
+    gap: 32px;
     text-align: center;
   }
 
   .coming-copy p {
     margin-right: auto;
     margin-left: auto;
+  }
+
+  .coming-orbit {
+    width: min(52vw, 260px);
+  }
+
+  .coming-orbit img {
+    width: clamp(220px, 42vw, 290px);
+  }
+
+  .interest-card {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
   }
 }
 
@@ -2167,12 +2183,12 @@ main {
 
   .coming-hero {
     width: calc(100vw - 24px);
-    gap: 28px;
-    padding: 54px 0 42px;
+    gap: 22px;
+    padding: 34px 0 30px;
   }
 
   .coming-orbit {
-    width: min(78vw, 280px);
+    display: none;
   }
 
   .coming-copy h1 {
@@ -2184,6 +2200,17 @@ main {
     margin-top: 18px;
     font-size: 0.98rem;
     line-height: 1.62;
+  }
+
+  .interest-card {
+    align-items: stretch;
+    margin-top: 22px;
+    padding: 16px;
+  }
+
+  .interest-button,
+  .interest-success {
+    width: 100%;
   }
 
   .coming-footer {
@@ -2200,7 +2227,7 @@ main {
     width: calc(100vw - 24px);
     grid-template-columns: 1fr;
     gap: 22px;
-    margin: 0 auto 12px;
+    margin: 18px auto 12px;
     padding: 20px;
   }
 
