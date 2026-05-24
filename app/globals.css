@@ -1361,14 +1361,20 @@ main {
   font-size: 1rem;
 }
 
-.coming-dots::after {
-  content: "...";
+.coming-dots .dot {
   display: inline-block;
-  width: 0;
-  overflow: hidden;
-  text-align: left;
-  vertical-align: bottom;
-  animation: comingDots 1.25s steps(4, end) infinite;
+  opacity: 0;
+  animation: comingDots 1.5s ease-in-out infinite both;
+}
+
+.coming-dots .dot:nth-child(1) { animation-delay: 0s; }
+.coming-dots .dot:nth-child(2) { animation-delay: 0.5s; }
+.coming-dots .dot:nth-child(3) { animation-delay: 1s; }
+
+@keyframes comingDots {
+  0%,
+  100% { opacity: 0; }
+  50%  { opacity: 1; }
 }
 
 .coming-footer {
@@ -1599,12 +1605,6 @@ main {
   }
   50% {
     transform: translate3d(0, 8px, 0) scale(1.04);
-  }
-}
-
-@keyframes comingDots {
-  100% {
-    width: 0.72em;
   }
 }
 

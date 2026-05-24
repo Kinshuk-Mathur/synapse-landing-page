@@ -47,9 +47,13 @@ export default function ComingSoonPage() {
 
         <div className="coming-copy">
           <span className="section-kicker">SYNAPSE</span>
-          <h1>
-            Coming Soon<span className="coming-dots" aria-hidden="true" />
-          </h1>
+            <h1>
+              Coming Soon<span className="coming-dots" aria-hidden="true">
+                <span className="dot">.</span>
+                <span className="dot">.</span>
+                <span className="dot">.</span>
+              </span>
+            </h1>
           <p>
             The future of focused learning and student productivity is coming soon.
             For now, this page is holding
