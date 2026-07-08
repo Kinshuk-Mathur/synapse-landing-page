@@ -1360,10 +1360,15 @@ main {
   box-shadow: 0 0 30px rgba(31, 197, 97, 0.18);
   font-size: 1rem;
 }
+.coming-dots {
+  display: inline;
+}
 
 .coming-dots .dot {
   display: inline-block;
   opacity: 0;
+  will-change: opacity;
+  transform: translateZ(0);
   animation: comingDots 1.5s ease-in-out infinite both;
 }
 
