@@ -68,7 +68,7 @@ const showcases = [
     title: "A command center for every study decision.",
     copy:
       "Live focus metrics, goals, pending work, distractions, and SYNAPSE AI stay connected in one obsidian cockpit.",
-    image: "/assets/dashboard.png",
+    image: "/assets/dashboard.jpeg",
     alt: "SYNAPSE dashboard with analytics and AI assistant",
     accent: "sky",
     stats: ["4h 32m focus", "87% score", "24 blocked"]
@@ -78,7 +78,7 @@ const showcases = [
     title: "Tasks that stay visible until the work is done.",
     copy:
       "Calendar planning, priorities, day lock, streaks, and quick capture turn a messy study day into a focused sequence.",
-    image: "/assets/todo.png",
+    image: "/assets/todo.jpeg",
     alt: "SYNAPSE todo page with calendar and tasks",
     accent: "gold",
     stats: ["5 tasks", "12 day streak", "0% drift"]
@@ -88,7 +88,7 @@ const showcases = [
     title: "Monthly ambition with measurable momentum.",
     copy:
       "Track every goal, progress curve, deadline, category, and streak with the same system that guides daily execution.",
-    image: "/assets/goals.png",
+    image: "/assets/goals.jpeg",
     alt: "SYNAPSE goals page with monthly goal tracking",
     accent: "pink",
     stats: ["26% complete", "4 goals", "12 day streak"]
@@ -98,11 +98,31 @@ const showcases = [
     title: "A study copilot that understands school context.",
     copy:
       "Ask for plans, explain concepts, summarize PDFs, solve doubts, and route prompts through the right AI mode.",
-    image: "/assets/synapse-ai-solve.jpeg",
+    image: "/assets/synapse-ai-solvee.jpeg",
     alt: "SYNAPSE AI solving a math equation step by step",
     accent: "purple",
     stats: ["study plans", "PDF summaries", "doubt solving"]
-  }
+  },
+  {
+    eyebrow: "SYNAPSE NOTES",
+    title: "A smart notebook that organizes your thoughts.",
+    copy:
+      "Capture ideas, create structured notes, format content automatically, and ask anything instantly with SYNAPSE AI.",
+    image: "/assets/synapse-notes.jpeg",
+    alt: "SYNAPSE Notes organizing study notes with AI",
+    accent: "blue",
+    stats: ["smart notes", "AI organization", "instant search"]
+  },
+  {
+    eyebrow: "NOTES EDITOR",
+    title: "Write faster with an AI-powered editor.",
+    copy:
+      "Draft notes, improve writing, generate summaries, format content instantly, and stay focused with a clean editing experience.",
+    image: "/assets/example-note.jpeg",
+    alt: "SYNAPSE AI-powered Notes Editor",
+    accent: "indigo",
+    stats: ["smart formatting", "Clean UI"]
+  },
 ];
 
 const features: Array<{
@@ -110,47 +130,47 @@ const features: Array<{
   copy: string;
   icon: IconComponent;
 }> = [
-  {
-    title: "AI Study Assistant",
-    copy: "Turns questions, chapters, and messy prompts into clear study actions.",
-    icon: BrainCircuit
-  },
-  {
-    title: "Smart Todo System",
-    copy: "Daily tasks, priorities, lock-in windows, and carryovers for real follow-through.",
-    icon: ListChecks
-  },
-  {
-    title: "Monthly Goals Tracking",
-    copy: "Progress rings, trend cards, categories, deadlines, and consistency streaks.",
-    icon: Target
-  },
-  {
-    title: "FocusLock Extension",
-    copy: "Blocks distractions at the browser layer and feeds focus data back into SYNAPSE.",
-    icon: ShieldCheck
-  },
-  {
-    title: "Productivity Analytics",
-    copy: "Focus time, blocked sites, score trends, and weekly rhythm in one dashboard.",
-    icon: BarChart3
-  },
-  {
-    title: "AI PDF Summaries",
-    copy: "Compresses long material into study-ready explanations and next steps.",
-    icon: FileText
-  },
-  {
-    title: "Multi-AI Routing System",
-    copy: "Routes study plans, doubts, summaries, and productivity help to specialized modes.",
-    icon: GitBranch
-  },
-  {
-    title: "Theme Personalization",
-    copy: "Obsidian glass, neon accents, and adaptive interface states for each mode.",
-    icon: Palette
-  }
-];
+    {
+      title: "AI Study Assistant",
+      copy: "Turns questions, chapters, and messy prompts into clear study actions.",
+      icon: BrainCircuit
+    },
+    {
+      title: "Smart Todo System",
+      copy: "Daily tasks, priorities, lock-in windows, and carryovers for real follow-through.",
+      icon: ListChecks
+    },
+    {
+      title: "Monthly Goals Tracking",
+      copy: "Progress rings, trend cards, categories, deadlines, and consistency streaks.",
+      icon: Target
+    },
+    {
+      title: "FocusLock Extension",
+      copy: "Blocks distractions at the browser layer and feeds focus data back into SYNAPSE.",
+      icon: ShieldCheck
+    },
+    {
+      title: "Productivity Analytics",
+      copy: "Focus time, blocked sites, score trends, and weekly rhythm in one dashboard.",
+      icon: BarChart3
+    },
+    {
+      title: "AI PDF Summaries",
+      copy: "Compresses long material into study-ready explanations and next steps.",
+      icon: FileText
+    },
+    {
+      title: "Multi-AI Routing System",
+      copy: "Routes study plans, doubts, summaries, and productivity help to specialized modes.",
+      icon: GitBranch
+    },
+    {
+      title: "Theme Personalization",
+      copy: "Obsidian glass, neon accents, and adaptive interface states for each mode.",
+      icon: Palette
+    }
+  ];
 
 const aiPrompts = [
   "Create my study plan",

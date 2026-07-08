@@ -11,6 +11,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@netlify/blobs@^10.7.8",
         "npm:@react-three/fiber@^9.3.0",
         "npm:@types/node@^22.10.2",
         "npm:@types/react-dom@^19.1.6",
